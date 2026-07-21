@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오늘의 발제</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background: #f7f7f5;
+    color: #1a1a1a;
+    padding: 32px 20px 60px;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 3px solid #c8102e;
+    padding-bottom: 16px; margin-bottom: 8px; flex-wrap: wrap; gap: 10px;
+  }
+  header h1 { font-size: 24px; margin: 0; letter-spacing: -0.5px; }
+  header .meta { text-align: right; font-size: 12.5px; color: #666; line-height: 1.6; }
+  .badge {
+    display: inline-block; background: #c8102e; color: #fff; font-size: 11px;
+    padding: 2px 8px; border-radius: 10px; margin-left: 6px; font-weight: 600;
+  }
+  .subnote { font-size: 12.5px; color: #888; margin: 10px 0 28px; }
+  .section-title {
+    font-size: 16px; font-weight: 700; margin: 32px 0 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title .tag {
+    font-size: 12px; background: #1a1a1a; color: #fff; padding: 3px 9px; border-radius: 4px;
+  }
+  .section-title.gov .tag { background: #2b4c7e; }
+  .section-title.biz .tag { background: #c8102e; }
+  .card {
+    background: #fff; border: 1px solid #e6e4df; border-radius: 10px;
+    padding: 18px 20px; margin-bottom: 14px; position: relative;
+  }
+  .card .num {
+    position: absolute; top: -10px; left: 16px; background: #1a1a1a; color: #fff;
+    font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 8px;
+  }
+  .card .datetag {
+    position: absolute; top: -10px; right: 16px; background: #2e7d32; color: #fff;
+    font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 8px;
+  }
+  .card .datetag.old { background: #b26a00; }
+  .card h3 { font-size: 16.5px; margin: 10px 0 4px; line-height: 1.4; }
+  .card .sub { font-size: 13px; color: #555; margin: 0 0 12px; line-height: 1.5; }
+  .card .row { font-size: 12.8px; margin: 6px 0; line-height: 1.6; }
+  .card .row b { color: #333; font-weight: 700; }
+  .card .factcheck {
+    margin-top: 10px; font-size: 12px; background: #fff7e6; border: 1px solid #f0d999;
+    color: #8a6100; padding: 7px 10px; border-radius: 6px;
+  }
+  .card .src { margin-top: 8px; font-size: 12px; }
+  .card .src a { color: #2b4c7e; text-decoration: none; }
+  .card .src a:hover { text-decoration: underline; }
+  footer {
+    margin-top: 40px; padding-top: 16px; border-top: 1px solid #ddd;
+    font-size: 12px; color: #999; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>오늘의 발제 브리핑<span class="badge">평일 06시 · 14시 갱신</span></h1>
+    <div class="meta">
+      최종 갱신: 2026-07-21(화) 23:20<br>
+      다음 갱신 예정: 2026-07-22(수) 06:00
+    </div>
+  </header>
+  <div class="subnote">
+    수집(최신뉴스·공시) → 초안 → 교차 평가 → 편집국장 압축의 4단계를 거친 관(정책·기관) 5건, 기업 5건입니다. 각 카드 우측 상단은 근거가 된 사건의 실제 발생·보도 시점입니다(원칙: 1주 이내, 넓게는 1개월 이내). 헤럴드경제(홍석희 기자)가 이미 보도한 주제는 제외했습니다. 팩트체크 표시(⚠) 항목은 최신 수치로 재확인이 필요합니다.
+  </div>
+
+  <div class="section-title gov"><span class="tag">관</span> 정책·기관 발제 5건</div>
+
+  <div class="card">
+    <span class="num">관 1</span><span class="datetag">7.19</span>
+    <h3>총리가 중기단체 불러 밥 먹은 날, 나온 말은 'AI 대전환'뿐이었다</h3>
+    <p class="sub">7월19일 오찬 간담회, 실질 지원책은 언제 나오나</p>
+    <div class="row"><b>배경</b> 한성숙 국무총리가 7월19일 삼청동 총리공관에 중소기업중앙회·소상공인연합회 등 중소기업단체협의회 8곳 관계자를 초청해 오찬 간담회를 열고 "성장의 과실이 중소·벤처기업과 소상공인까지 퍼지도록 하겠다"고 말했다. AI 대전환 등 실질 지원 방안을 모색하겠다는 취지였지만 구체 정책은 이 자리에서 나오지 않았다.</div>
+    <div class="row"><b>취재 포인트</b> 간담회에서 각 단체가 건의한 내용을 개별 취재로 확보하고, 총리가 7월2일 취임 후 주재한 비상경제점검회의 등 앞선 행보와 실제 후속 정책 발표 여부를 대조한다.</div>
+    <div class="factcheck">⚠ 참석 단체 8곳 명단과 발언 원문을 총리실 공식 자료로 재확인할 것</div>
+    <div class="src"><a href="https://www.mt.co.kr/politics/2026/07/19/2026071917465922596" target="_blank">머니투데이 — 한성숙 총리, 친정격 중기協 초청</a> · <a href="https://www.hankyung.com/article/2026071928281" target="_blank">한국경제 — 中企인 만난 한성숙 총리</a></div>
+  </div>
+
+  <div class="card">
+    <span class="num">관 2</span><span class="datetag">7월 시행</span>
+    <h3>기술보증기금, 이달부터 최대 100억 보증 신설…첫 수혜 기업은 어디</h3>
+    <p class="sub">'R&D 사업화 프로젝트 보증' 7월 시행, 보증료도 최대 0.5%p 깎아준다</p>
+    <div class="row"><b>배경</b> 기술보증기금이 7월부터 'R&D 사업화 프로젝트 보증'을 새로 시행했다. 최근 5년 이내 정부 R&D 과제를 완료했거나 공공연구기관 기술을 이전받아 사업화하는 기업을 대상으로 운전자금 30억원을 포함해 최대 100억원까지 지원하고, 보증료도 최대 0.5%포인트 감면한다.</div>
+    <div class="row"><b>취재 포인트</b> 시행 3주째인 현재까지 실제 심사·집행 건수를 기보에 확인하고, 유사한 기존 R&D 보증 상품과 지원 조건을 비교한다.</div>
+    <div class="factcheck">⚠ 제도 시행일과 지원 한도(운전자금 30억원 포함 최대 100억원)를 기보 공식 공고로 재확인할 것</div>
+    <div class="src"><a href="https://www.kibo.or.kr/vc/ivst/ivst06/uniconmain.do" target="_blank">기술보증기금</a></div>
+  </div>
+
+  <div class="card">
+    <span class="num">관 3</span><span class="datetag old">3.18 시행중</span>
+    <h3>소진공 대환대출 시행 4개월, 정작 몇 명이나 갈아탔나</h3>
+    <p class="sub">7%대 고금리를 4.5%로 낮춰준다더니 집행 실적은 여태 안 나왔다</p>
+    <div class="row"><b>배경</b> 소상공인시장진흥공단이 지난 3월18일부터 고금리(연 7% 이상) 대출을 연 4.5% 고정금리로 갈아탈 수 있는 대환대출을 시행 중이다. 업체당 최대 5000만원, 최장 10년 상환 조건이다. ※이 항목은 신규 발생 뉴스가 아니라 시행 4개월 차 진행 상황을 점검하는 성격의 발제임을 밝힌다.</div>
+    <div class="row"><b>취재 포인트</b> 소진공에 정보공개청구 또는 직접 취재로 누적 집행 건수·금액·심사 탈락률을 확보하고, 애초 목표 물량 대비 소진율을 계산한다.</div>
+    <div class="factcheck">⚠ 대출 조건(금리 4.5%, 한도 5000만원, 상환 10년)을 소진공 공식 공고로 재확인할 것</div>
+    <div class="src"><a href="https://www.semas.or.kr/" target="_blank">소상공인시장진흥공단</a></div>
+  </div>
+
+  <div class="card">
+    <span class="num">관 4</span><span class="datetag">2026.7</span>
+    <h3>국회가 들여다본 중기부 작년 살림, 집행 성적표는 몇 점</h3>
+    <p class="sub">국회예산정책처 결산분석 보고서, 산업통상자원중소벤처기업위 편 이번달 공개</p>
+    <div class="row"><b>배경</b> 국회예산정책처가 2026년 7월 '2025회계연도 결산 분석' 중 산업통상자원중소벤처기업위원회 편을 냈다. 중기부 및 산하기관 예산의 실제 집행률과 문제점을 짚는 국회 차원의 공식 점검 자료다.</div>
+    <div class="row"><b>취재 포인트</b> 보고서 원문(PDF)을 입수해 중기부·산하 공공기관별 불용액·집행률 하위 사업을 추리고, 전년도 지적 사항이 올해도 반복됐는지 대조한다.</div>
+    <div class="factcheck">⚠ 보고서 본문을 직접 확인하지 않은 상태로, 구체적 수치·지적 사업명은 원문 확인 후 기사화할 것</div>
+    <div class="src"><a href="https://www.nabo.go.kr/board/file/bulkDown.do?idx=9365&bid=19" target="_blank">국회예산정책처 — 2025회계연도 결산분석(산자중기위)</a></div>
+  </div>
+
+  <div class="card">
+    <span class="num">관 5</span><span class="datetag old">시점 미확인</span>
+    <h3>자영업자도 고용보험 된다는데, 17개 시도 실제로 다 됐나</h3>
+    <p class="sub">정부·지자체 공동 지원체계 구축이라지만 지역별 편차는 확인되지 않았다</p>
+    <div class="row"><b>배경</b> 정부와 전국 17개 시·도가 자영업자 고용보험료 지원체계를 구축했다는 내용이 소진공 관련 자료에서 확인된다. 다만 구체 시행 시점과 지역별 지원 조건은 이번 조사로 특정하지 못했다.</div>
+    <div class="row"><b>취재 포인트</b> 소진공·중기부에 시행 시점과 시도별 예산·지원율 편차를 문의하고, 실제 가입 유도 효과(가입률 변화)를 확인한다.</div>
+    <div class="factcheck">⚠ 이 항목은 시행 시점을 특정하지 못했음 — 최신 사안인지 편집국장 판단 전 반드시 재검증 필요</div>
+    <div class="src"><a href="https://www.semas.or.kr/web/SUP01/SUP013001.kmdc" target="_blank">소상공인시장진흥공단 — 소상공인 고용보험료 지원</a></div>
+  </div>
+
+  <div class="section-title biz"><span class="tag">기업</span> 산업·기업 발제 5건</div>
+
+  <div class="card">
+    <span class="num">기업 1</span><span class="datetag">7.7~7.10</span>
+    <h3>콜마 목표주가 14만원으로, 코스맥스도 26만원…ODM 투톱 눈높이 왜 같이 오르나</h3>
+    <p class="sub">자외선차단제·인디 브랜드가 견인, 두 회사가 그리는 그림은 다르다</p>
+    <div class="row"><b>배경</b> 하나증권이 7월7일 한국콜마 목표주가를 11만원에서 14만원으로 올리며 2분기 영업이익을 944억원(전년比 28.5%↑)으로 추정했다. 비슷한 시기 교보증권도 코스맥스 목표주가를 26만원으로 제시했다.</div>
+    <div class="row"><b>취재 포인트</b> 두 증권사 리포트의 실적 추정 근거(자외선차단제 수출 비중, 인디 브랜드 매출 비중)를 비교하고, 콜마의 '대기업 지정'이 실제 수주에 미치는 영향을 취재한다.</div>
+    <div class="factcheck">⚠ 증권사 추정치는 확정 실적이 아니므로, 8월 예정된 2분기 확정 실적 발표 후 반드시 재확인할 것</div>
+    <div class="src"><a href="https://www.hantoday.net/news/articleView.html?idxno=54153" target="_blank">한국투데이 — 한국콜마 목표주가 14만원 상향(7.7)</a> · <a href="https://www.newspim.com/news/view/20260707000691" target="_blank">뉴스핌 — 코스맥스 목표가 26만원(7.7)</a></div>
+  </div>
+
+  <div class="card">
+    <span class="num">기업 2</span><span class="datetag">7.13</span>
+    <h3>코웨이, 말레이시아서 영업이익 17%↑…국내 정체를 동남아가 메운다</h3>
+    <p class="sub">말레이시아·태국 중심 해외 사업 존재감이 커지고 있다</p>
+    <div class="row"><b>배경</b> 코웨이의 말레이시아·태국 등 동남아 사업이 매출 성장과 수익성 개선을 동시에 이끌고 있으며, 말레이시아 영업이익은 17% 늘었다는 보도가 나왔다.</div>
+    <div class="row"><b>취재 포인트</b> 코웨이 해외 사업 부문 매출·영업이익 비중 추이를 최근 3개년 공시로 확인하고, SK매직·청호나이스 등 경쟁사의 해외 진출 현황과 비교한다.</div>
+    <div class="factcheck">⚠ '영업이익 17%↑'의 기준 시점(전년 동기 대비 여부)을 코웨이 IR 자료로 재확인할 것</div>
+    <div class="src"><a href="https://www.newspim.com/news/view/20260713000975" target="_blank">뉴스핌 — 말레이시아서 힘 받은 코웨이(7.13)</a></div>
+  </div>
+
+  <div class="card">
+    <span class="num">기업 3</span><span class="datetag">7.2</span>
+    <h3>현대리바트, 두께 늘린 주방가구 냈다…한샘과 붙는 지점이 달라졌다</h3>
+    <p class="sub">'변형 최소화' 내세운 M200G, 리모델링 수요 정조준</p>
+    <div class="row"><b>배경</b> 현대리바트가 7월2일 주방가구 신제품 'M200G'를 출시했다. 상·하부장 도어와 선반 등 전 부위에 일반 제품보다 두꺼운 18mm 자재를 적용해 변형·처짐을 최소화한 것이 특징이다.</div>
+    <div class="row"><b>취재 포인트</b> 한샘·에넥스 등 경쟁사 동급 제품과 자재 두께·가격을 비교하고, 최근 재건축·리모델링 시장 위축 속에서 이런 '내구성 마케팅'이 실제 판매로 이어지는지 취재한다.</div>
+    <div class="factcheck">⚠ 출시일(7월2일)과 자재 두께 스펙을 현대리바트 보도자료 원문으로 재확인할 것</div>
+    <div class="src"><a href="https://www.etoday.co.kr/news/view/2599570" target="_blank">이투데이 — 현대리바트 M200G 출시(7.2)</a></div>
+  </div>
+
+  <div class="card">
+    <span class="num">기업 4</span><span class="datetag">7.15</span>
+    <h3>LX하우시스, 불 안 붙는 보드 냈다…건자재 안전 기준 강화되나</h3>
+    <p class="sub">'Z:IN 방염보드' 출시, 화재 안전 규제 흐름과 맞물렸다</p>
+    <div class="row"><b>배경</b> LX하우시스가 7월15일 화재 안전성을 높인 'LX Z:IN 방염보드'를 출시했다.</div>
+    <div class="row"><b>취재 포인트</b> 최근 다중이용시설·공동주택 마감재 방염 기준 강화 논의가 있는지 국토부·소방청에 확인하고, KCC글라스 등 경쟁사의 유사 제품 출시 여부를 취재한다.</div>
+    <div class="factcheck">⚠ 방염 기준 관련 정부 규제 논의 여부는 별도 확인 전이므로, 확인 안 되면 '건자재 신제품' 소재로만 축소할 것</div>
+    <div class="src"><a href="https://www.windoor.co.kr/news/articleView.html?idxno=12769" target="_blank">LX하우시스 관련 업계지 보도</a></div>
+  </div>
+
+  <div class="card">
+    <span class="num">기업 5</span><span class="datetag">7.21</span>
+    <h3>레고, 어른들 지갑 열러 포켓몬 들고 왔다…국내 완구업계는 또 뒷짐</h3>
+    <p class="sub">성인 타깃 '레고 포켓몬' 시리즈 공개, 손오공·영실업은 대응 카드 있나</p>
+    <div class="row"><b>배경</b> 레고코리아가 오늘(7월21일) 성인을 겨냥한 '레고 포켓몬' 시리즈 신제품 5종을 공개했다. 8월 3종, 10월 2종이 순차 출시된다. 레고코리아는 지난해 매출 2012억원으로 국내 완구업계 1위이며, 손오공·영실업은 매출을 합쳐도 레고코리아에 못 미친다.</div>
+    <div class="row"><b>취재 포인트</b> 손오공·영실업 등 국내 완구사에 성인 타깃(키덜트) 라인업 대응 계획을 확인하고, 국내 완구 시장에서 레고 점유율 추이를 업계 자료로 확보한다.</div>
+    <div class="factcheck">⚠ 레고코리아 지난해 매출·영업이익 수치를 최신 공시로 재확인할 것</div>
+    <div class="src"><a href="https://www.betanews.net/article/view/beta202607210037" target="_blank">베타뉴스 — 레고코리아 성인용 포켓몬 시리즈 공개(7.21)</a></div>
+  </div>
+
+  <footer>
+    발제 파이프라인: ①최신 뉴스·공시 수집(발생 시점 확인 포함) → ②아이템 초안 작성 → ③교차 평가(중복·보도자료 재탕·시의성 확인) → ④편집국장 압축(관 5·기업 5). 노란색 팩트체크 박스(⚠)는 반드시 원문·1차 출처로 재확인 후 기사화할 것. 시행 중인 제도를 점검하는 항목(관3)과 시점 미확인 항목(관5)은 카드 우측 상단에 별도 표기했다.<br>
+    수집 범위: 담당 업역(가구·도료·화장품ODM·레미콘·건자재·완구·상조·교육·소상공인·방판) 및 중기부·산하 공공기관. 헤럴드경제(홍석희 기자)가 이미 다룬 주제는 제외.
+  </footer>
+</div>
+</body>
+</html>
