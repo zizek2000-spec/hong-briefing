@@ -7,28 +7,30 @@
 <style>
   :root { color-scheme: light; }
   * { box-sizing: border-box; }
+  html, body { height: 100%; }
   body {
     margin: 0;
     font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     background: #f7f7f5;
     color: #1a1a1a;
-    padding: 32px 20px 60px;
+    padding: 28px clamp(16px, 4vw, 56px) 60px;
   }
-  .wrap { max-width: 920px; margin: 0 auto; }
+  .wrap { max-width: 1680px; margin: 0 auto; width: 100%; }
   header {
     display: flex; justify-content: space-between; align-items: flex-end;
     border-bottom: 3px solid #1a5d3a;
     padding-bottom: 16px; margin-bottom: 8px; flex-wrap: wrap; gap: 10px;
   }
-  header h1 { font-size: 24px; margin: 0; letter-spacing: -0.5px; }
-  header .meta { text-align: right; font-size: 12.5px; color: #666; line-height: 1.6; }
+  header h1 { font-size: 26px; margin: 0; letter-spacing: -0.5px; }
+  header .meta { text-align: right; font-size: 13px; color: #666; line-height: 1.7; }
+  header .meta a { color: #1a5d3a; font-weight: 600; }
   .badge {
     display: inline-block; background: #1a5d3a; color: #fff; font-size: 11px;
     padding: 2px 8px; border-radius: 10px; margin-left: 6px; font-weight: 600;
   }
-  .subnote { font-size: 12.5px; color: #888; margin: 10px 0 28px; }
+  .subnote { font-size: 13px; color: #888; margin: 10px 0 28px; line-height: 1.6; }
   .section-title {
-    font-size: 16px; font-weight: 700; margin: 32px 0 14px;
+    font-size: 17px; font-weight: 700; margin: 32px 0 14px;
     display: flex; align-items: center; gap: 8px;
   }
   .section-title .tag {
@@ -36,11 +38,14 @@
   }
   .section-title.read .tag { background: #1a5d3a; }
   .section-title.pitch .tag { background: #c8102e; }
-  ol.readlist { padding-left: 0; margin: 0; list-style: none; counter-reset: item; }
+  ol.readlist {
+    padding-left: 0; margin: 0 0 8px; list-style: none; counter-reset: item;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 8px;
+  }
   ol.readlist li {
     counter-increment: item;
     background: #fff; border: 1px solid #e6e4df; border-radius: 8px;
-    padding: 10px 14px 10px 44px; margin-bottom: 8px; position: relative; font-size: 13.5px; line-height: 1.5;
+    padding: 10px 14px 10px 44px; position: relative; font-size: 13.5px; line-height: 1.5;
   }
   ol.readlist li::before {
     content: counter(item);
@@ -49,7 +54,8 @@
     width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
   }
   ol.readlist li a { color: #16324a; text-decoration: none; font-weight: 600; }
-  ol.readlist li a:hover { text-decoration: underline; }
+  ol.readlist li a:hover { text-decoration: underline; color: #1a5d3a; }
+  ol.readlist li a::after { content: " ↗"; font-size: 11px; color: #b8b6b0; }
   ol.readlist li .src { color: #888; font-size: 11.5px; margin-left: 6px; }
   ol.readlist li .flag {
     display: inline-block; font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 4px;
@@ -58,19 +64,27 @@
   .flag.exclusive { background: #fdeaea; color: #c8102e; }
   .flag.trend { background: #e8f1fb; color: #1c5ea8; }
   .flag.gov { background: #eef2ff; color: #2b4c7e; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+    gap: 16px;
+  }
   .card {
     background: #fff; border: 1px solid #e6e4df; border-radius: 10px;
-    padding: 18px 20px; margin-bottom: 14px; position: relative;
+    padding: 18px 20px; position: relative; display: flex; flex-direction: column;
   }
   .card .num {
     position: absolute; top: -10px; left: 16px; background: #1a1a1a; color: #fff;
     font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 8px;
   }
-  .card h3 { font-size: 16.5px; margin: 10px 0 4px; line-height: 1.4; }
+  .card h3 { font-size: 17px; margin: 10px 0 4px; line-height: 1.4; }
+  .card h3 a { color: #1a1a1a; text-decoration: none; }
+  .card h3 a:hover { color: #1a5d3a; text-decoration: underline; }
+  .card h3 a::after { content: " ↗"; font-size: 13px; color: #b8b6b0; }
   .card .sub { font-size: 13px; color: #555; margin: 0 0 12px; line-height: 1.5; }
-  .card .row { font-size: 12.8px; margin: 6px 0; line-height: 1.6; }
+  .card .row { font-size: 13px; margin: 6px 0; line-height: 1.65; }
   .card .row b { color: #333; font-weight: 700; }
-  .card .src { margin-top: 8px; font-size: 12px; }
+  .card .src { margin-top: auto; padding-top: 8px; font-size: 12.5px; }
   .card .src a { color: #2b4c7e; text-decoration: none; }
   .card .src a:hover { text-decoration: underline; }
   footer {
@@ -86,11 +100,11 @@
     <div class="meta">
       기준 시각: 2026-07-21(화) 23:20<br>
       수집: 네이버뉴스 경제&gt;중기/벤처 (Apify)<br>
-      <a href="../" style="color:#1a5d3a;">→ 발제 브리핑(관·기업) 보기</a>
+      <a href="../">→ 발제 브리핑(관·기업) 보기</a>
     </div>
   </header>
   <div class="subnote">
-    네이버뉴스 경제&gt;중기/벤처 섹션 최근 기사 중 꼭 읽어볼 만한 20건(취재·단독·트렌드 우선)과, 오늘 석간용 발제 5건입니다. <span class="flag exclusive">단독</span> <span class="flag trend">트렌드</span> <span class="flag gov">기관</span> 표시로 구분했습니다.
+    네이버뉴스 경제&gt;중기/벤처 섹션 최근 기사 중 꼭 읽어볼 만한 20건(취재·단독·트렌드 우선)과, 오늘 석간용 발제 5건입니다. 제목을 클릭하면 원문 기사로 이동합니다. <span class="flag exclusive">단독</span> <span class="flag trend">트렌드</span> <span class="flag gov">기관</span> 표시로 구분했습니다.
   </div>
 
   <div class="section-title read"><span class="tag">필독</span> 오늘의 필독기사 20건</div>
@@ -118,10 +132,11 @@
   </ol>
 
   <div class="section-title pitch"><span class="tag">발제</span> 오늘 석간용 발제 5건</div>
+  <div class="grid">
 
   <div class="card">
     <span class="num">발제 1</span>
-    <h3>소파 다음은 식탁, 까사미아 '포멜로'는 '캄포 시즌2'가 될까</h3>
+    <h3><a href="https://n.news.naver.com/mnews/article/018/0006334128" target="_blank">소파 다음은 식탁, 까사미아 '포멜로'는 '캄포 시즌2'가 될까</a></h3>
     <p class="sub">10분에 1개씩 팔린 캄포 소파 신화, 다이닝 가구로 이어지나</p>
     <div class="row"><b>배경</b> 신세계까사 까사미아가 2019년 출시 후 누적 45만개 팔린 '캄포 소파'에 이어, 다이닝 가구 '포멜로'가 인기를 끌고 있다는 보도가 나왔다.</div>
     <div class="row"><b>취재 포인트</b> 포멜로의 실제 판매량·매출 기여도를 신세계까사에 확인하고, 한샘·현대리바트 등 경쟁사의 다이닝 라인업 대응 현황과 비교한다. '단일 히트상품 의존' 리스크도 짚는다.</div>
@@ -130,7 +145,7 @@
 
   <div class="card">
     <span class="num">발제 2</span>
-    <h3>세라젬은 왜 가구 매장에 헬스케어 가전을 들였나</h3>
+    <h3><a href="https://n.news.naver.com/mnews/article/021/0002806066" target="_blank">세라젬은 왜 가구 매장에 헬스케어 가전을 들였나</a></h3>
     <p class="sub">웰스토어에 가구 브랜드 콜라보 쇼룸, '헬스케어=가전' 공식이 깨지고 있다</p>
     <div class="row"><b>배경</b> 세라젬이 라이프스타일 가구 브랜드 카레클린트와 협업한 쇼룸을 용인기흥 웰스토어에 열었다.</div>
     <div class="row"><b>취재 포인트</b> 코웨이 비렉스, 바디프랜드 등 경쟁사도 유사한 '가구화' 전략을 쓰는지 확인하고, 왜 지금 헬스케어 가전업계가 가구 영역을 넘보는지(성숙 시장 돌파구) 구조적으로 짚는다.</div>
@@ -139,7 +154,7 @@
 
   <div class="card">
     <span class="num">발제 3</span>
-    <h3>중동전쟁이 레미콘 공장까지 흔든다…시멘트업계 원가 비상</h3>
+    <h3><a href="https://n.news.naver.com/mnews/article/014/0005550924" target="_blank">중동전쟁이 레미콘 공장까지 흔든다…시멘트업계 원가 비상</a></h3>
     <p class="sub">에너지원 다변화 대응 나섰다지만, 고환율까지 겹친 이중고</p>
     <div class="row"><b>배경</b> 한국시멘트협회가 중동전쟁발 원유 공급망 불안에 따른 제조원가 상승 대응책으로 에너지원 다변화를 거론했다.</div>
     <div class="row"><b>취재 포인트</b> 삼표·아세아시멘트 등 실제 레미콘·시멘트사의 유연탄·원유 매입단가 변동폭을 확인하고, 최근 원/달러 환율 상승이 원자재 수입 비용에 미치는 영향을 겹쳐서 분석한다.</div>
@@ -148,7 +163,7 @@
 
   <div class="card">
     <span class="num">발제 4</span>
-    <h3>사모펀드가 항공부품사에 꽂힌 이유, 율곡 인수전이 보여준 것</h3>
+    <h3><a href="https://n.news.naver.com/mnews/article/011/0004643706" target="_blank">사모펀드가 항공부품사에 꽂힌 이유, 율곡 인수전이 보여준 것</a></h3>
     <p class="sub">VIG파트너스發 단독, 방산·부품사 M&A 러시의 신호탄인가</p>
     <div class="row"><b>배경</b> VIG파트너스가 항공기 부품 기업 '율곡' 인수 우선협상대상자로 선정됐다는 단독 보도가 나왔다.</div>
     <div class="row"><b>취재 포인트</b> 최근 1~2년간 PEF의 방산·항공부품사 인수 사례를 리스트업하고, 왜 지금 이 업종에 자금이 몰리는지(K방산 수출 호조와의 연관성) 구조적으로 짚는다. 인수가·거래구조는 서울경제 시그널 원문으로 재확인.</div>
@@ -157,11 +172,13 @@
 
   <div class="card">
     <span class="num">발제 5</span>
-    <h3>정부는 'AI윤리 준수기관'만 늘리는데, 현장은 이미 AI 전환 중이었다</h3>
+    <h3><a href="https://n.news.naver.com/mnews/article/009/0005710256" target="_blank">정부는 'AI윤리 준수기관'만 늘리는데, 현장은 이미 AI 전환 중이었다</a></h3>
     <p class="sub">중진공의 인증 마크와 조선 기자재 업체의 실전 AI 도입, 온도차는 없나</p>
     <div class="row"><b>배경</b> 중소벤처기업진흥공단이 'AI윤리 준수기관' 확인마크를 획득한 날, 스마트큐브는 대불산단 조선 기자재 업체 선우와 손잡고 현장 AI 전환(AX)에 속도를 냈다는 별도 보도가 나왔다.</div>
     <div class="row"><b>취재 포인트</b> 중진공의 AI윤리 준수기관 지정이 실제 중소기업 AI 도입 지원과 어떻게 연결되는지 확인하고, 현장 기업(스마트큐브·선우 등)이 체감하는 정책 지원 공백을 취재한다.</div>
     <div class="row"><b>출처</b> <a href="https://n.news.naver.com/mnews/article/009/0005710256" target="_blank">매일경제(7.21)</a> · <a href="https://n.news.naver.com/mnews/article/008/0005388861" target="_blank">머니투데이(7.21)</a></div>
+  </div>
+
   </div>
 
   <footer>
