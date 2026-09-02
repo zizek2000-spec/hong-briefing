@@ -68,7 +68,7 @@ header h1 {
 }
 
 header h1::before {
-  content: "HONG BRIEFING";
+  content: "DAILY BRIEFING";
   display: block;
   margin-bottom: 8px;
   color: #a7d5bd;

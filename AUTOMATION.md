@@ -1,6 +1,6 @@
 # Cloud Automation
 
-This repository is set up to refresh `hong-briefing` from GitHub Actions, so the schedule can run even when the owner's home computer is off.
+This repository is set up to refresh a daily reporting briefing from GitHub Actions, so the schedule can run even when the owner's home computer is off.
 
 ## Schedule
 

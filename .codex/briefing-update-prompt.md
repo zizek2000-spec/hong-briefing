@@ -1,6 +1,6 @@
-# Hong Briefing Scheduled Update
+# Daily Briefing Scheduled Update
 
-You are updating the public GitHub Pages site for `zizek2000-spec/hong-briefing`.
+You are updating the public GitHub Pages site in the current repository.
 
 Operate only inside this repository. Never print, commit, or expose tokens, API keys, secrets, cookies, or environment variables. Do not change GitHub Actions workflow files, this prompt, `assets/`, or `toolbox/` during a normal briefing update. Do not commit or push; the workflow handles that after you finish editing files.
 
@@ -26,7 +26,7 @@ Use the most recent 14 days of history to avoid repeating the same company pair,
 
 ## Editorial scope
 
-This is a reporter briefing for Hong Seok-hee covering SMEs, startups, venture policy, appliances, furniture, education, home/living goods, security, industrial equipment, materials, and related mid-sized companies.
+This is a private-use reporter briefing covering SMEs, startups, venture policy, appliances, furniture, education, home/living goods, security, industrial equipment, materials, and related mid-sized companies. Never expose the reporter's real name, employer, email address, phone number, account name, or other identifying information in generated pages, titles, metadata, comments, or documentation.
 
 Government, policy, and institution scope:
 
@@ -43,7 +43,7 @@ Company scope:
 - Use this source ladder: DART/KIND original filing → government/legislature/audit/regulator original material → official statistics/research paper → company IR/press release → media report. A media report may surface an item, but material numbers and dates should be rechecked against the highest available primary source.
 - Check the newest research and statistics from 중소벤처기업연구원, KOSIS/통계청, 한국은행, 관세청 and 산업연구원 when relevant. At least one of the ten pitch cards should use an independent statistic, research result, historical figure, competitor comparison or filing so the output does not resemble a rewritten press release.
 - Media sources can be used, but do not summarize another outlet's article as the product. Turn it into a fresh reporting pitch with questions and verification points.
-- Do not reuse articles written by Hong Seok-hee.
+- Do not reuse articles written by the briefing's owner. Identify those articles during research, but refer to them only as the owner's prior reporting in public output and never print the owner's name or employer.
 - Do not invent facts, numbers, dates, titles, appointments, hearing dates, investments, contracts, or financial results. If a point is not verified, mark it as a remaining verification item or leave it out.
 - Every source link in the HTML must be directly relevant to the card.
 - Keep source provenance explicit. Separate `확인된 사실`, `새 기사 각도`, `취재 대상·질문`, and `남은 검증사항`; never present an inference, forecast, company claim or unnamed-source estimate as confirmed fact.

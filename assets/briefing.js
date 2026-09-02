@@ -70,7 +70,7 @@
   }
 
   function storageKey(item) {
-    return 'hong-briefing-status:' + getTitle(item).slice(0, 100);
+    return 'daily-briefing-status:' + getTitle(item).slice(0, 100);
   }
 
   function copyText(item, button) {
@@ -176,13 +176,13 @@
       applyFilters();
     }));
 
-    const compact = localStorage.getItem('hong-briefing-compact') === 'true';
+    const compact = localStorage.getItem('daily-briefing-compact') === 'true';
     body.classList.toggle('compact-mode', compact);
     view.textContent = compact ? '상세 보기' : '요약 보기';
     view.addEventListener('click', () => {
       body.classList.toggle('compact-mode');
       const enabled = body.classList.contains('compact-mode');
-      localStorage.setItem('hong-briefing-compact', String(enabled));
+      localStorage.setItem('daily-briefing-compact', String(enabled));
       view.textContent = enabled ? '상세 보기' : '요약 보기';
     });
 

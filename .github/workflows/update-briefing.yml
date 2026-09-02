@@ -1,4 +1,4 @@
-name: Update Hong Briefing
+name: Update Daily Briefing
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ on:
     - cron: "7 5 * * 1-5"
 
 concurrency:
-  group: hong-briefing-update
+  group: daily-briefing-update
   cancel-in-progress: false
 
 permissions:
@@ -74,8 +74,8 @@ jobs:
         if: steps.commit.outputs.changed == 'true'
         run: |
           sleep 90
-          curl -fsSL --retry 5 --retry-delay 20 https://zizek2000-spec.github.io/hong-briefing/ > /tmp/hong-briefing.html
-          if ! grep -q "오늘의 발제" /tmp/hong-briefing.html; then
+          curl -fsSL --retry 5 --retry-delay 20 https://zizek2000-spec.github.io/hong-briefing/ > /tmp/daily-briefing.html
+          if ! grep -q "오늘의 발제" /tmp/daily-briefing.html; then
             echo "::error::Public page responded, but the expected title was not found."
             exit 1
           fi
