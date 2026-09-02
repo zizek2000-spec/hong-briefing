@@ -3,8 +3,11 @@ name: Update Hong Briefing
 on:
   workflow_dispatch:
   schedule:
-    - cron: "7 6,14 * * 1-5"
-      timezone: "Asia/Seoul"
+    # GitHub Actions schedules use UTC.
+    # 21:07 UTC Sun-Thu = 06:07 KST Mon-Fri.
+    - cron: "7 21 * * 0-4"
+    # 05:07 UTC Mon-Fri = 14:07 KST Mon-Fri.
+    - cron: "7 5 * * 1-5"
 
 concurrency:
   group: hong-briefing-update
