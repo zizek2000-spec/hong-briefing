@@ -1,0 +1,78 @@
+name: Update Hong Briefing
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 6,14 * * 1-5"
+      timezone: "Asia/Seoul"
+
+concurrency:
+  group: hong-briefing-update
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: github.repository == 'zizek2000-spec/hong-briefing'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Check required OpenAI key
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "::error::Missing GitHub Actions secret OPENAI_API_KEY. Add it in Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+      - name: Run Codex briefing update
+        id: run_codex
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          codex-home: .codex
+          permission-profile: briefing-workspace
+          codex-args: '["--search"]'
+          allow-bots: "true"
+          prompt-file: .codex/briefing-update-prompt.md
+          output-file: .codex-last-run.md
+
+      - name: Commit updated briefing
+        id: commit
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add index.html morning/index.html config/topic-history.txt config/morning-history.txt topic-history.txt morning-history.txt
+
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No briefing changes detected."
+            exit 0
+          fi
+
+          run_label="$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M KST')"
+          git commit -m "자동 발제 브리핑 갱신: ${run_label}"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Check public GitHub Pages URL
+        if: steps.commit.outputs.changed == 'true'
+        run: |
+          sleep 90
+          curl -fsSL --retry 5 --retry-delay 20 https://zizek2000-spec.github.io/hong-briefing/ > /tmp/hong-briefing.html
+          if ! grep -q "오늘의 발제" /tmp/hong-briefing.html; then
+            echo "::error::Public page responded, but the expected title was not found."
+            exit 1
+          fi
