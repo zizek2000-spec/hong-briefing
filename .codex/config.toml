@@ -1,0 +1,22 @@
+default_permissions = "briefing-workspace"
+
+[features]
+network_proxy = true
+
+[permissions.briefing-workspace]
+description = "Edit the briefing site and read public web sources for scheduled updates."
+extends = ":workspace"
+
+[permissions.briefing-workspace.filesystem]
+glob_scan_max_depth = 3
+
+[permissions.briefing-workspace.filesystem.":workspace_roots"]
+"**/*.env" = "deny"
+".env" = "deny"
+".env.*" = "deny"
+
+[permissions.briefing-workspace.network]
+enabled = true
+
+[permissions.briefing-workspace.network.domains]
+"*" = "allow"
