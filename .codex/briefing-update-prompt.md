@@ -2,7 +2,7 @@
 
 You are updating the public GitHub Pages site for `zizek2000-spec/hong-briefing`.
 
-Operate only inside this repository. Never print, commit, or expose tokens, API keys, secrets, cookies, or environment variables. Do not change GitHub Actions workflow files or this prompt during a normal briefing update. Do not commit or push; the workflow handles that after you finish editing files.
+Operate only inside this repository. Never print, commit, or expose tokens, API keys, secrets, cookies, or environment variables. Do not change GitHub Actions workflow files, this prompt, `assets/`, or `toolbox/` during a normal briefing update. Do not commit or push; the workflow handles that after you finish editing files.
 
 ## Timing
 
@@ -39,26 +39,34 @@ Company scope:
 ## Research rules
 
 - Use web search for the latest sources from the past 7 days. Expand to 30 days only when needed for context or when recent verified material is thin.
-- Prefer primary sources: government releases, institution notices, DART/KIND filings, company IR/press releases, official statements, and legislature/audit/regulator material.
+- Search the entire company scope by clusters before selecting cards. Do not stop after finding enough government items. Record in the page note how many company clusters were checked and why fewer than five company pitches were published, if applicable.
+- Use this source ladder: DART/KIND original filing → government/legislature/audit/regulator original material → official statistics/research paper → company IR/press release → media report. A media report may surface an item, but material numbers and dates should be rechecked against the highest available primary source.
+- Check the newest research and statistics from 중소벤처기업연구원, KOSIS/통계청, 한국은행, 관세청 and 산업연구원 when relevant. At least one of the ten pitch cards should use an independent statistic, research result, historical figure, competitor comparison or filing so the output does not resemble a rewritten press release.
 - Media sources can be used, but do not summarize another outlet's article as the product. Turn it into a fresh reporting pitch with questions and verification points.
 - Do not reuse articles written by Hong Seok-hee.
 - Do not invent facts, numbers, dates, titles, appointments, hearing dates, investments, contracts, or financial results. If a point is not verified, mark it as a remaining verification item or leave it out.
 - Every source link in the HTML must be directly relevant to the card.
+- Keep source provenance explicit. Separate `확인된 사실`, `새 기사 각도`, `취재 대상·질문`, and `남은 검증사항`; never present an inference, forecast, company claim or unnamed-source estimate as confirmed fact.
+- Check the key nouns, numbers, dates, product names, people, titles, company names and event names in every pitch title against the linked original source before saving.
+- Write Korean numbers without comma separators: `1000`, `1만3000`, `100만`. Use straight quotation marks only. Put event names in single quotes. Write the common noun `솔루션` as `설루션`, while preserving registered product or company names.
 
 ## Output requirements
 
 Update `index.html` on every run:
 
-- Preserve the existing visual design and CSS structure unless a small HTML validity fix is necessary.
+- Preserve the reporting-desk shell and current visible design. Keep `<script src="assets/briefing.js" defer></script>` before the closing body tag. The script supplies the persistent navigation, search, filters, source shortcuts, compact view, copy action, and local reporting status. Do not inline or duplicate that code.
+- Keep navigation access to `오늘의 발제`, `모닝 브리핑`, and `취재 도구 20선`; the latter points to `toolbox/`.
 - Create a briefing of up to 10 cards: target government/policy/institution 5 and company/industry 5.
 - Publish fewer than 10 only when there are not enough verified, non-duplicative pitches. Say that in the page note.
 - Every card must be 교차형: compare, contrast, or connect at least two companies, institutions, policies, markets, or data points.
 - Each card needs title, date, background/facts, fresh article angle, reporting questions or follow-up points, remaining verification points, and source links.
-- Update the "주요 공시" section from DART/KIND or clearly state no material filing was found.
+- Inspect all in-scope listed companies for new DART/KIND filings. Show no more than five material filings in the `주요 공시` section, ranked by article value. For each displayed filing link to the original disclosure and state why it matters. If none qualifies, clearly state that no material filing was found and do not pad the section.
+- Prefer company cards that compare one of the assigned companies with a direct competitor, its own prior-year number, or an industry statistic. A standalone product launch or event notice is not enough.
 
 For the morning run, also update `morning/index.html`:
 
-- Keep its current design.
+- Keep its current design and `<link rel="stylesheet" href="../assets/briefing.css">`. Keep `<script src="../assets/briefing.js" defer></script>` before the closing html tag.
+- Keep navigation access to `오늘의 발제`, `모닝 브리핑`, and `취재 도구 20선`; the latter points to `../toolbox/`.
 - Include up to 20 must-read links and up to 5 evening-story pitch cards.
 - Make the pitch cards cross-comparison items, not plain article summaries.
 

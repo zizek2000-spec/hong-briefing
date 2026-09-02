@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="한국 기자와 언론사의 공개 GitHub 프로젝트 20개에서 홍 브리핑에 적용할 취재 기능을 정리한 페이지">
+  <title>취재 도구 20선 | 홍 브리핑</title>
+  <link rel="stylesheet" href="../assets/briefing.css">
+</head>
+<body class="toolbox-page">
+  <main>
+    <header>
+      <h1>취재 도구 20선</h1>
+      <div class="meta">한국 기자·언론사 공개 프로젝트와 국내 취재 실무에 활용할 수 있는 도구를 직접 확인해 분류했습니다. · 2026-09-03 확인</div>
+      <nav class="workspace-nav">
+        <a href="../">오늘의 발제</a>
+        <a href="../morning/">모닝 브리핑</a>
+        <a class="active" aria-current="page" href="./">취재 도구 20선</a>
+      </nav>
+    </header>
+
+    <section class="toolbox-hero">
+      <div class="toolbox-panel">
+        <h2>홍 브리핑에 실제 반영한 네 가지</h2>
+        <p>공개 저장소의 코드를 복사하지 않고, 취재 흐름에 맞는 기능 원칙을 새로 구현했습니다.</p>
+        <div class="principles">
+          <div class="principle">원자료와 가공 기준을 함께 남기기</div>
+          <div class="principle">모든 주장에 확인 가능한 링크 달기</div>
+          <div class="principle">읽음 대신 ‘취재중·기사화·보류’ 상태 저장</div>
+          <div class="principle">검색·중복 제거·기간 비교를 기본값으로</div>
+        </div>
+      </div>
+      <div class="toolbox-panel">
+        <h2>현재 화면에서 쓰는 기능</h2>
+        <p>발제 검색, 정책·기관/담당 기업 분류, 요약 보기, 발제 복사, 취재 상태 저장, DART·KIND·중기연구원 원문 바로가기를 넣었습니다. 상태는 사용 중인 브라우저에만 저장됩니다.</p>
+      </div>
+    </section>
+
+    <div class="repo-note">‘기자·언론사’는 저장소 설명이나 공개 이력으로 언론 프로젝트임을 확인한 경우입니다. ‘실무 도구’는 기자가 만들었다고 단정할 근거는 부족하지만 국내 뉴스 수집·분석·검증에 직접 활용할 수 있어 별도로 분류했습니다.</div>
+
+    <section class="desk-toolbar toolbox-toolbar" aria-label="저장소 검색과 분류">
+      <input id="repo-search" class="desk-search" type="search" placeholder="프로젝트·기능 검색" aria-label="취재 도구 검색">
+      <div class="filter-group" role="group" aria-label="저장소 분류">
+        <button class="filter-chip active" type="button" data-repo-filter="all">전체 20</button>
+        <button class="filter-chip" type="button" data-repo-filter="newsroom">언론 프로젝트</button>
+        <button class="filter-chip" type="button" data-repo-filter="data">취재 데이터</button>
+        <button class="filter-chip" type="button" data-repo-filter="tool">실무 도구</button>
+      </div>
+      <span id="repo-count" class="desk-count" aria-live="polite">20/20개 표시</span>
+    </section>
+
+    <div class="section-title"><span class="tag">확인</span> 기자·언론사 공개 프로젝트</div>
+    <section class="repo-grid">
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/clamWell/Project_laborDeath" target="_blank" rel="noopener">1. 산업재해 사망 기록</a></h3>
+        <p>2018~2019년 산업재해 사망 기록을 D3 그래프와 Leaflet 지도에 결합한 기사 프로젝트입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 숫자만 요약하지 않고 개별 사건 원자료와 시각화를 연결합니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/clamWell/undrerground_households" target="_blank" rel="noopener">2. 반지하 가구 지도</a></h3>
+        <p>경향신문 산업부와 진행한 반지하 가구 보도로, 행정구역별 검색과 인구 데이터 지도를 구현했습니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 정책 수치를 지역·기업 단위로 내려가 검색할 수 있게 만듭니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/clamWell/Project_virus" target="_blank" rel="noopener">3. 코로나 세계 확산 지도</a></h3>
+        <p>국제부와 확진·사망 데이터를 세계 지도와 서사형 기사에 결합한 프로젝트입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 시계열 자료는 발표 당일 수치보다 변화 경로를 먼저 보여줍니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/clamWell/Millennial_investReport" target="_blank" rel="noopener">4. 밀레니얼 투자 리포트</a></h3>
+        <p>설문 결과를 이용자 반응형 막대그래프로 보여준 투자 기사 페이지입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 설문·통계는 표본과 질문을 함께 남겨 수치의 한계를 드러냅니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/clamWell/tracknroom" target="_blank" rel="noopener">5. N번방 사건 타임라인</a></h3>
+        <p>경향신문 사회부와 사건 전개를 시간순으로 탐색할 수 있게 만든 타임라인형 기사입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 인사·정책·분쟁처럼 이어지는 사안은 최신 기사와 앞선 변곡점을 연결합니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/clamWell/carbonPrint" target="_blank" rel="noopener">6. 플라스틱과 탄소발자국</a></h3>
+        <p>한국의 플라스틱 폐기물 문제와 탄소발자국을 다룬 디지털 기사 페이지입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 기업 발표를 규제·환경 통계와 교차해 광고성 재작성 위험을 줄입니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/clamWell/greatelection" target="_blank" rel="noopener">7. 선거 인터랙티브</a></h3>
+        <p>선거 결과와 지역 정보를 웹에서 탐색하도록 만든 대규모 시각화 프로젝트입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 국회·단체 선거는 인물보다 일정·선출 구조·표 단위를 먼저 구조화합니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/clamWell/network_chart" target="_blank" rel="noopener">8. 인물·조직 관계망</a></h3>
+        <p>인물과 조직의 연결 관계를 네트워크 그래프로 표현하는 기반 코드입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 지분·계열·협회 인맥은 문장보다 관계 데이터로 먼저 저장합니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="data">
+        <span class="repo-type data">취재 데이터</span>
+        <h3><a href="https://github.com/OhmyNews/KA-money" target="_blank" rel="noopener">9. 국회의원 정치자금 2012~2024</a></h3>
+        <p>오마이뉴스가 OCR로 만든 정치자금 지출 데이터를 분류 기준·오류 가능성과 함께 공개했습니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 원자료, 기자가 붙인 분류, 주의사항을 분리해 재검증 가능성을 남깁니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="data">
+        <span class="repo-type data">취재 데이터</span>
+        <h3><a href="https://github.com/OhmyNews/KA-money_addr" target="_blank" rel="noopener">10. 정치자금 사용처 주소</a></h3>
+        <p>정치자금 지출내역에 사용처 주소를 결합해 공간 분석이 가능하도록 만든 데이터입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 거래 상대·지역·계열사를 붙여 단일 공시에서 보이지 않는 패턴을 찾습니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="data">
+        <span class="repo-type data">취재 데이터</span>
+        <h3><a href="https://github.com/OhmyNews/20220309_KOREA_election" target="_blank" rel="noopener">11. 2022 대선 투표소 데이터</a></h3>
+        <p>선관위 개표 데이터에 평균연령·공시지가·건강보험료·사전투표율을 결합했습니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 하나의 결과 수치에 원인을 단정하지 않고 설명 변수 여러 개를 나란히 둡니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="data">
+        <span class="repo-type data">취재 데이터</span>
+        <h3><a href="https://github.com/OhmyNews/2017-Election" target="_blank" rel="noopener">12. 2017 대선 사회경제지표</a></h3>
+        <p>시군구 득표율과 사회경제지표를 결합해 선거 결과를 비교한 자료입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 경기지표·매출·고용처럼 성격이 다른 수치의 비교 단위와 시점을 맞춥니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/OhmyNews/2020_21_elec_map" target="_blank" rel="noopener">13. 21대 총선 지도</a></h3>
+        <p>2020년 국회의원 총선거 결과를 지도에서 확인할 수 있게 만든 오마이뉴스 프로젝트입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 전국 단위 발표를 담당 지역·산단·선거구 단위로 좁혀 후속 발제를 찾습니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="data">
+        <span class="repo-type data">취재 데이터</span>
+        <h3><a href="https://github.com/opengirok/localcouncil" target="_blank" rel="noopener">14. 전국 지방의원 의정감시 데이터</a></h3>
+        <p>정보공개청구와 SBS 취재 데이터 등을 모아 의원 프로필·겸직·징계를 갱신하는 공개 데이터셋입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> ‘원자료 → 갱신일 → 수정 이력 → 관련 기사’ 흐름을 회사·기관별 기록에 적용합니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="newsroom">
+        <span class="repo-type">언론 프로젝트</span>
+        <h3><a href="https://github.com/Newstapa/official-assets-explorer" target="_blank" rel="noopener">15. 고위공직자 재산 검색</a></h3>
+        <p>뉴스타파와 CC Korea가 스캔 관보를 OCR·검증해 검색 가능한 공직자 재산 데이터로 바꾼 프로젝트입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 검색이 막힌 PDF도 구조화해 인물·법인·금액별로 다시 찾을 수 있게 합니다.</p>
+      </article>
+    </section>
+
+    <div class="section-title"><span class="tag">활용</span> 국내 취재 실무에 유용한 공개 도구</div>
+    <section class="repo-grid">
+      <article class="repo-card" data-repo-kind="tool">
+        <span class="repo-type tool">실무 도구</span>
+        <h3><a href="https://github.com/twbeatles/navernews-tabsearch" target="_blank" rel="noopener">16. 네이버 뉴스 스크래퍼 Pro</a></h3>
+        <p>키워드별 수집, 제외어, 중복 숨김, 읽음·북마크·메모·태그, CSV·Markdown 내보내기를 지원합니다.</p>
+        <p class="adopt"><strong>반영 완료</strong> 검색·분류·브라우저별 취재 상태·발제 복사 기능을 홍 브리핑에 넣었습니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="tool">
+        <span class="repo-type tool">실무 도구</span>
+        <h3><a href="https://github.com/hammerbaki/enterprise-llm-agent-harness" target="_blank" rel="noopener">17. 한국 기업 브리핑 에이전트</a></h3>
+        <p>DART·KRX·뉴스에서 재무 신호, 위험, 모니터링 포인트, 후속 질문을 만들고 모든 주장에 출처를 연결합니다.</p>
+        <p class="adopt"><strong>반영 완료</strong> 발제마다 사실·각도·취재 질문·남은 검증·원문 링크를 의무화했습니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="tool">
+        <span class="repo-type tool">실무 도구</span>
+        <h3><a href="https://github.com/lumyjuwon/KoreaNewsCrawler" target="_blank" rel="noopener">18. KoreaNewsCrawler</a></h3>
+        <p>네이버 뉴스의 분야·기간을 정해 병렬 수집하고 날짜·언론사·제목·본문·주소를 CSV로 저장합니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 담당 분야·회사 목록과 제외어를 분리해 수집 누락과 잡음을 동시에 줄입니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="tool">
+        <span class="repo-type tool">실무 도구</span>
+        <h3><a href="https://github.com/sorrychoe/pyBigKinds" target="_blank" rel="noopener">19. pyBigKinds</a></h3>
+        <p>빅카인즈에서 받은 데이터를 언론사별 건수·키워드·워드클라우드 등으로 분석하는 파이썬 도구입니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 경쟁사 보도량과 반복 제목을 수치화해 ‘이미 많이 나온 기사’를 걸러냅니다.</p>
+      </article>
+
+      <article class="repo-card" data-repo-kind="tool">
+        <span class="repo-type tool">실무 도구</span>
+        <h3><a href="https://github.com/KPF-bigkinds/Hackathon-2021" target="_blank" rel="noopener">20. ‘따옴표를 따옴’ 66.99</a></h3>
+        <p>한국언론진흥재단 지원 해커톤 수상작으로 인용형 제목을 판단유보·책임회피·선정주의 유형으로 분류합니다.</p>
+        <p class="adopt"><strong>가져올 점</strong> 제목의 인용문이 기사에서 검증됐는지 송고 전 점검 항목에 넣습니다.</p>
+      </article>
+    </section>
+
+    <footer>저장소의 공개 상태와 설명은 2026년9월3일 기준입니다. 각 저장소의 라이선스와 데이터 이용조건은 원문에서 별도로 확인해야 합니다. 홍 브리핑은 외부 저장소 코드를 복제하지 않고 확인된 기능 원칙만 독자적으로 구현했습니다.</footer>
+  </main>
+  <script src="../assets/briefing.js" defer></script>
+</body>
+</html>
