@@ -6,11 +6,12 @@
   const inSubdir = /\/(morning|toolbox)\/?$/.test(path);
   const root = inSubdir ? '../' : './';
   const page = path.includes('/morning') ? 'morning' : path.includes('/toolbox') ? 'toolbox' : 'pitch';
+  const assetVersion = '20260905-graph-v2';
 
   if (!document.querySelector('link[href*="briefing.css"]')) {
     const style = document.createElement('link');
     style.rel = 'stylesheet';
-    style.href = root + 'assets/briefing.css';
+    style.href = `${root}assets/briefing.css?v=${assetVersion}`;
     document.head.appendChild(style);
   }
 
