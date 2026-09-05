@@ -85,6 +85,7 @@ def main():
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>데일리 종합 브리핑</title>
 <link rel="stylesheet" href="assets/briefing.css">
+<link rel="stylesheet" href="assets/graph.css">
 </head><body>
 <header><div class="wrap"><h1>데일리 종합형·공시 브리핑</h1><p>기준 시각 {generated} · 그래프 엔지니어링 자동 발제</p><div class="nav"></div></div></header>
 <main class="wrap">
@@ -94,7 +95,7 @@ def main():
 <h2 class="section-title">정책·기관 발제</h2><div class="grid">{''.join(card_html(p) for p in policy) if policy else '<div class="notice">이번 실행에서 검증을 통과한 정책·기관 발제가 없습니다.</div>'}</div>
 <h2 class="section-title">기업·산업·데이터 발제</h2><div class="grid">{''.join(card_html(p) for p in company) if company else '<div class="notice">이번 실행에서 검증을 통과한 기업·산업 발제가 없습니다.</div>'}</div>
 <footer>자동 수집 결과는 취재 출발점입니다. 기사 송고 전 원문·공시·통계의 숫자와 날짜를 다시 확인하십시오.</footer>
-</main><script src="assets/briefing.js" defer></script></body></html>'''
+</main><script src="assets/briefing.js" defer></script><script src="assets/graph.js" defer></script></body></html>'''
     OUT.write_text(doc, encoding="utf-8")
     print(f"rendered {len(pitches)} pitches to {OUT}")
 
