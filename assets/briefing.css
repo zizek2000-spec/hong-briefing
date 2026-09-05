@@ -18,9 +18,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background:
-    radial-gradient(circle at 90% 0, rgba(29, 106, 73, .09), transparent 28rem),
-    var(--paper) !important;
+  background: var(--paper) !important;
   color: var(--ink) !important;
   padding: 0 !important;
   font-size: 16px;
@@ -40,7 +38,7 @@ header {
   padding: 22px 24px 18px !important;
   margin: 0 0 18px !important;
   border: 1px solid rgba(255, 255, 255, .14) !important;
-  border-radius: 18px;
+  border-radius: 12px;
   background: linear-gradient(135deg, #102d21, #184f38 68%, #226247);
   color: #fff;
   box-shadow: var(--shadow);
@@ -48,14 +46,7 @@ header {
 }
 
 header::after {
-  content: "";
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  right: -90px;
-  top: -150px;
-  border: 1px solid rgba(255, 255, 255, .13);
-  border-radius: 50%;
+  display: none;
 }
 
 header h1 {
@@ -63,7 +54,7 @@ header h1 {
   z-index: 1;
   margin: 0 0 8px !important;
   font-size: clamp(1.7rem, 3vw, 2.35rem) !important;
-  letter-spacing: -.045em !important;
+  letter-spacing: 0 !important;
   line-height: 1.15;
 }
 
@@ -110,7 +101,7 @@ header .tag {
   min-height: 38px;
   padding: 8px 13px !important;
   border: 1px solid rgba(255, 255, 255, .3) !important;
-  border-radius: 9px !important;
+  border-radius: 8px !important;
   color: #fff !important;
   text-decoration: none;
   font-size: .84rem !important;
@@ -131,7 +122,7 @@ header .tag {
   margin: 0 0 16px !important;
   padding: 17px 20px;
   border: 1px solid var(--line);
-  border-radius: 13px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, .72);
   color: var(--muted) !important;
   line-height: 1.7 !important;
@@ -140,51 +131,57 @@ header .tag {
 
 .dashboard-intro .note { margin: 0; }
 
+.summary,
+.notice {
+  border-radius: 8px !important;
+}
+
 .graph-board {
   margin: 0 0 18px;
-  padding: 20px;
-  border: 1px solid #ccd8cf;
-  border-radius: 16px;
-  background: linear-gradient(180deg, #ffffff, #f7faf7);
-  box-shadow: var(--shadow);
+  padding: 18px;
+  border: 1px solid #d4ddd6;
+  border-top: 4px solid var(--green);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(23, 33, 28, .055);
 }
 
 .graph-head {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 18px;
-  align-items: start;
-  margin-bottom: 16px;
+  grid-template-columns: minmax(0, 1fr) minmax(136px, auto);
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 14px;
 }
 
 .graph-head h2 {
-  margin: 10px 0 6px;
-  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  margin: 8px 0 5px;
+  font-size: clamp(1.22rem, 1.8vw, 1.52rem);
   line-height: 1.25;
-  letter-spacing: -.025em;
+  letter-spacing: 0;
 }
 
 .graph-head p {
-  max-width: 760px;
+  max-width: 720px;
   margin: 0;
   color: #53625a;
-  font-size: .92rem;
-  line-height: 1.75;
+  font-size: .9rem;
+  line-height: 1.65;
 }
 
 .graph-verdict {
-  min-width: 150px;
-  padding: 13px 15px;
+  min-width: 136px;
+  padding: 10px 12px;
   border: 1px solid #b7d3c0;
-  border-radius: 12px;
-  background: #e9f6ed;
+  border-radius: 8px;
+  background: #eef7f2;
   color: #176137;
-  text-align: right;
+  text-align: left;
 }
 
 .graph-verdict strong {
   display: block;
-  font-size: 1.05rem;
+  font-size: .98rem;
 }
 
 .graph-verdict span {
@@ -197,16 +194,20 @@ header .tag {
 .graph-flow {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 8px;
-  margin: 0 0 14px;
+  gap: 6px;
+  margin: 0 0 10px;
 }
 
 .graph-node {
   position: relative;
-  min-height: 110px;
-  padding: 13px 12px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 8px;
+  align-content: start;
+  min-height: 82px;
+  padding: 10px;
   border: 1px solid #cdd8d0;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #fff;
   color: var(--ink);
   text-align: left;
@@ -215,39 +216,35 @@ header .tag {
 }
 
 .graph-node:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -8px;
-  width: 8px;
-  border-top: 2px solid #b7c6bb;
+  display: none;
 }
 
 .graph-node span {
   display: inline-grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
-  margin-bottom: 10px;
+  grid-row: 1 / span 2;
+  width: 22px;
+  height: 22px;
+  margin: 1px 0 0;
   border-radius: 50%;
   background: var(--green);
   color: #fff;
-  font-size: .76rem;
+  font-size: .72rem;
   font-weight: 800;
 }
 
 .graph-node b {
   display: block;
-  margin-bottom: 4px;
-  font-size: .9rem;
-  line-height: 1.35;
+  margin: 0 0 2px;
+  font-size: .86rem;
+  line-height: 1.25;
 }
 
 .graph-node small {
   display: block;
   color: var(--muted);
-  font-size: .75rem;
-  line-height: 1.45;
+  font-size: .72rem;
+  line-height: 1.4;
 }
 
 .graph-node:hover,
@@ -263,21 +260,21 @@ header .tag {
 .graph-metrics {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 14px;
+  gap: 6px;
+  margin-bottom: 10px;
 }
 
 .graph-metrics div {
-  padding: 12px;
+  padding: 9px 10px;
   border: 1px solid #d9e1da;
-  border-radius: 11px;
+  border-radius: 8px;
   background: #fbfdfb;
 }
 
 .graph-metrics b {
   display: block;
   color: var(--green);
-  font-size: 1.25rem;
+  font-size: 1.08rem;
   line-height: 1.2;
 }
 
@@ -290,9 +287,9 @@ header .tag {
 
 .graph-review {
   margin: 0;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-left: 4px solid var(--amber);
-  border-radius: 10px;
+  border-radius: 8px;
   background: #fff8e9;
   color: #644818;
   font-size: .86rem;
@@ -300,7 +297,7 @@ header .tag {
 }
 
 .card.graph-focus {
-  outline: 3px solid rgba(169, 106, 19, .35);
+  outline: 2px solid rgba(169, 106, 19, .35);
   outline-offset: 2px;
 }
 
@@ -315,7 +312,7 @@ header .tag {
   margin: 0 0 12px;
   padding: 12px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, .95);
   box-shadow: 0 8px 28px rgba(23, 33, 28, .08);
   backdrop-filter: blur(12px);
@@ -326,7 +323,7 @@ header .tag {
   min-height: 42px;
   padding: 10px 13px;
   border: 1px solid #cbd4cc;
-  border-radius: 9px;
+  border-radius: 8px;
   background: #fff;
   color: var(--ink);
   font: inherit;
@@ -408,7 +405,7 @@ ol.readlist li {
 
 .card {
   padding: 21px !important;
-  border-radius: 14px !important;
+  border-radius: 8px !important;
   transition: transform .18s ease, box-shadow .18s ease, opacity .18s ease;
 }
 
@@ -418,7 +415,7 @@ ol.readlist li {
 .card h3 {
   font-size: 1.08rem !important;
   line-height: 1.45 !important;
-  letter-spacing: -.025em;
+  letter-spacing: 0;
 }
 
 .card .row,
@@ -445,7 +442,7 @@ ol.readlist li {
   margin: 0 0 20px !important;
   padding: 19px 21px !important;
   border-left: 5px solid var(--green) !important;
-  border-radius: 13px !important;
+  border-radius: 8px !important;
 }
 
 .disclosures h2 { margin-top: 0; }
@@ -493,7 +490,7 @@ ol.readlist {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 510px), 1fr)) !important;
 }
 
-ol.readlist li { border-radius: 11px !important; box-shadow: none; }
+ol.readlist li { border-radius: 8px !important; box-shadow: none; }
 
 .section-title {
   margin-top: 30px !important;
@@ -511,7 +508,7 @@ ol.readlist li { border-radius: 11px !important; box-shadow: none; }
 .toolbox-panel {
   padding: 22px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
   background: #fff;
   box-shadow: var(--shadow);
 }
@@ -520,10 +517,10 @@ ol.readlist li { border-radius: 11px !important; box-shadow: none; }
 .toolbox-panel p { margin: 0; color: var(--muted); line-height: 1.7; }
 
 .principles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin-top: 14px; }
-.principle { padding: 11px; border-radius: 9px; background: var(--green-soft); color: var(--green); font-size: .82rem; font-weight: 750; }
+.principle { padding: 11px; border-radius: 8px; background: var(--green-soft); color: var(--green); font-size: .82rem; font-weight: 750; }
 
 .repo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 14px; }
-.repo-card { padding: 18px; border: 1px solid var(--line); border-radius: 13px; background: #fff; }
+.repo-card { padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
 .repo-card h3 { margin: 8px 0 8px; font-size: 1rem; line-height: 1.4; }
 .repo-card h3 a { color: var(--ink); text-decoration: none; }
 .repo-card h3 a:hover { color: var(--green-2); text-decoration: underline; }
@@ -548,7 +545,7 @@ footer { line-height: 1.75 !important; }
 @media (max-width: 860px) {
   body > main,
   body > .wrap { width: min(100% - 24px, 1440px) !important; padding-top: 12px; }
-  header { padding: 19px 17px 16px !important; border-radius: 13px; }
+  header { padding: 19px 17px 16px !important; border-radius: 8px; }
   .graph-head { grid-template-columns: 1fr; }
   .graph-verdict { text-align: left; }
   .graph-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
