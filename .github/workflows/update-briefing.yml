@@ -1,7 +1,15 @@
-name: Update Daily Briefing
+name: Update Daily Briefing Graph
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-briefing.yml'
+      - '.codex/graph-*.md'
+      - 'scripts/render_graph.py'
+      - 'assets/graph.css'
+      - 'assets/graph.js'
   schedule:
     # GitHub Actions schedules use UTC.
     # 21:07 UTC Sun-Thu = 06:07 KST Mon-Fri.
@@ -10,17 +18,34 @@ on:
     - cron: "7 5 * * 1-5"
 
 concurrency:
-  group: daily-briefing-update
+  group: daily-briefing-graph
   cancel-in-progress: false
 
 permissions:
   contents: write
 
 jobs:
-  update:
+  research:
     if: github.repository == 'zizek2000-spec/hong-briefing'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - node: policy
+            prompt: .codex/graph-policy.md
+            output: graph_runs/policy.json
+          - node: company
+            prompt: .codex/graph-company.md
+            output: graph_runs/company.json
+          - node: filing
+            prompt: .codex/graph-filing.md
+            output: graph_runs/filing.json
+          - node: data
+            prompt: .codex/graph-data.md
+            output: graph_runs/data.json
 
     steps:
       - name: Checkout repository
@@ -32,13 +57,10 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          if [ -z "$OPENAI_API_KEY" ]; then
-            echo "::error::Missing GitHub Actions secret OPENAI_API_KEY. Add it in Settings > Secrets and variables > Actions."
-            exit 1
-          fi
+          test -n "$OPENAI_API_KEY" || { echo "::error::Missing OPENAI_API_KEY"; exit 1; }
+          mkdir -p graph_runs
 
-      - name: Run Codex briefing update
-        id: run_codex
+      - name: Run ${{ matrix.node }} research node
         uses: openai/codex-action@v1
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
@@ -46,27 +68,127 @@ jobs:
           permission-profile: briefing-workspace
           codex-args: '["--search"]'
           allow-bots: "true"
-          prompt-file: .codex/briefing-update-prompt.md
-          output-file: .codex-last-run.md
+          prompt-file: ${{ matrix.prompt }}
+          output-file: .codex-${{ matrix.node }}.md
+
+      - name: Validate node JSON
+        env:
+          NODE_OUTPUT: ${{ matrix.output }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib
+          p = pathlib.Path(os.environ['NODE_OUTPUT'])
+          if not p.exists():
+              raise SystemExit(f"missing node output: {p}")
+          data = json.loads(p.read_text(encoding='utf-8'))
+          if not isinstance(data.get('candidates'), list):
+              raise SystemExit('candidates must be a list')
+          print(f"validated {p}: {len(data['candidates'])} candidates")
+          PY
+
+      - name: Upload node result
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-${{ matrix.node }}
+          path: ${{ matrix.output }}
+          if-no-files-found: error
+          retention-days: 2
+
+  merge:
+    if: always() && github.repository == 'zizek2000-spec/hong-briefing'
+    needs: research
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Download successful research nodes
+        uses: actions/download-artifact@v4
+        with:
+          pattern: research-*
+          path: graph_runs
+          merge-multiple: true
+
+      - name: Show graph inputs
+        run: |
+          echo "Available graph nodes:"
+          find graph_runs -maxdepth 1 -name '*.json' -print || true
+          count=$(find graph_runs -maxdepth 1 -name '*.json' | wc -l)
+          if [ "$count" -lt 2 ]; then
+            echo "::error::Fewer than two research nodes succeeded; refusing to publish."
+            exit 1
+          fi
+
+      - name: Merge, validate and rank candidates
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          codex-home: .codex
+          permission-profile: briefing-workspace
+          codex-args: '["--search"]'
+          allow-bots: "true"
+          prompt-file: .codex/graph-merge.md
+          output-file: .codex-merge.md
+
+      - name: Validate final JSON and render site
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          p = pathlib.Path('data/latest.json')
+          if not p.exists():
+              raise SystemExit('missing data/latest.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          pitches = data.get('pitches')
+          if not isinstance(pitches, list):
+              raise SystemExit('pitches must be a list')
+          if len(pitches) > 10:
+              raise SystemExit('more than 10 pitches returned')
+          for item in pitches:
+              score = int(item.get('score', -1))
+              if not 0 <= score <= 100:
+                  raise SystemExit(f'invalid score: {score}')
+              if not item.get('title'):
+                  raise SystemExit('pitch without title')
+          print(f"final validation passed: {len(pitches)} pitches")
+          PY
+          python scripts/render_graph.py
+
+      - name: Append compact topic history
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          from pathlib import Path
+          data=json.loads(Path('data/latest.json').read_text(encoding='utf-8'))
+          titles=[p.get('title','').strip() for p in data.get('pitches',[])[:10] if p.get('title')]
+          stamp=datetime.now(ZoneInfo('Asia/Seoul')).strftime('%Y-%m-%d %H:%M')
+          line=f"{stamp} | GRAPH | " + ' / '.join(titles)
+          path=Path('config/topic-history.txt')
+          old=path.read_text(encoding='utf-8') if path.exists() else ''
+          if old and not old.endswith('\n'):
+              old += '\n'
+          path.write_text(old+line+'\n', encoding='utf-8')
+          PY
 
       - name: Commit updated briefing
         id: commit
         run: |
           set -euo pipefail
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add index.html morning/index.html config/topic-history.txt config/morning-history.txt topic-history.txt morning-history.txt
-
+          git add index.html data/latest.json config/topic-history.txt
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No briefing changes detected."
             exit 0
           fi
-
           run_label="$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M KST')"
-          git commit -m "자동 발제 브리핑 갱신: ${run_label}"
+          git commit -m "그래프 자동 발제 갱신: ${run_label}"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
@@ -75,7 +197,7 @@ jobs:
         run: |
           sleep 90
           curl -fsSL --retry 5 --retry-delay 20 https://zizek2000-spec.github.io/hong-briefing/ > /tmp/daily-briefing.html
-          if ! grep -q "오늘의 발제" /tmp/daily-briefing.html; then
-            echo "::error::Public page responded, but the expected title was not found."
+          grep -q "리서치 그래프 상태" /tmp/daily-briefing.html || {
+            echo "::error::Public page did not expose graph status marker."
             exit 1
-          fi
+          }
