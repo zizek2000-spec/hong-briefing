@@ -50,12 +50,26 @@ Company scope:
 - Check the key nouns, numbers, dates, product names, people, titles, company names and event names in every pitch title against the linked original source before saving.
 - Write Korean numbers without comma separators: `1000`, `1만3000`, `100만`. Use straight quotation marks only. Put event names in single quotes. Write the common noun `솔루션` as `설루션`, while preserving registered product or company names.
 
+## Graph engineering contract
+
+Treat every scheduled update as a graph, not a one-shot rewrite. Keep each stage auditable in the page text:
+
+1. Input node: read the current pages and the most recent 14 days of history.
+2. Fan-out collection nodes: separately search policy/institution sources, DART/KIND filings, company clusters, and independent statistics or research.
+3. Validation nodes: remove duplicates, exclude the owner's prior articles, verify dates/numbers/nouns against the highest available source, and reject cards without directly relevant links.
+4. Fan-in node: combine only verified material into cross-comparison pitches.
+5. Final check node: confirm card counts, source links, stale schedule text, remaining verification labels, and accidental secret leakage.
+6. Human-in-the-loop node: mark unresolved claims as `남은 검증` and leave the final article decision to the reporter.
+
+Update the visible `#briefing-graph` section in `index.html` on every run and keep it immediately after the top summary. It must show the node sequence, current card/source counts, and whether the briefing is `검증 통과` or `확인 필요`. Preserve the `data-graph-value` attributes so `assets/briefing.js` can recalculate the counts in the browser.
+
 ## Output requirements
 
 Update `index.html` on every run:
 
 - Preserve the reporting-desk shell and current visible design. Keep `<script src="assets/briefing.js" defer></script>` before the closing body tag. The script supplies the persistent navigation, search, filters, source shortcuts, compact view, copy action, and local reporting status. Do not inline or duplicate that code.
 - Keep navigation access to `오늘의 발제`, `모닝 브리핑`, and `취재 도구 20선`; the latter points to `toolbox/`.
+- Keep the `작업 그래프` anchor in the shared navigation. It should jump to `#briefing-graph` on the main page and `../#briefing-graph` from subpages.
 - Create a briefing of up to 10 cards: target government/policy/institution 5 and company/industry 5.
 - Publish fewer than 10 only when there are not enough verified, non-duplicative pitches. Say that in the page note.
 - Every card must be 교차형: compare, contrast, or connect at least two companies, institutions, policies, markets, or data points.

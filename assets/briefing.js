@@ -27,6 +27,7 @@
 
     const items = [
       ['pitch', root, '오늘의 발제'],
+      ['graph', root + '#briefing-graph', '작업 그래프'],
       ['morning', root + 'morning/', '모닝 브리핑'],
       ['toolbox', root + 'toolbox/', '취재 도구 20선']
     ];
@@ -189,6 +190,52 @@
     applyFilters();
   }
 
+  function buildGraphBoard() {
+    if (page !== 'pitch') return;
+    const board = document.querySelector('#briefing-graph');
+    if (!board) return;
+
+    const cards = Array.from(document.querySelectorAll('.card'));
+    const sourceLinks = Array.from(document.querySelectorAll('.card .sources a'));
+    const govCards = cards.filter(card => card.dataset.kind === 'gov');
+    const companyCards = cards.filter(card => card.dataset.kind === 'company');
+    const verificationCards = cards.filter(card => /남은 검증|남은 검증사항/.test(card.textContent || ''));
+    const domains = new Set(sourceLinks.map(link => {
+      try { return new URL(link.href).hostname.replace(/^www\./, ''); }
+      catch { return ''; }
+    }).filter(Boolean));
+
+    function setValue(name, value) {
+      const node = board.querySelector(`[data-graph-value="${name}"]`);
+      if (node) node.textContent = String(value);
+    }
+
+    setValue('cards', cards.length);
+    setValue('gov', govCards.length);
+    setValue('company', companyCards.length);
+    setValue('sources', sourceLinks.length);
+    setValue('domains', domains.size);
+    setValue('verify', verificationCards.length);
+    setValue('verdict', cards.length && sourceLinks.length ? '검증 통과' : '확인 필요');
+
+    const nodes = Array.from(board.querySelectorAll('[data-graph-filter]'));
+    function matches(card, filter) {
+      if (filter === 'all') return true;
+      if (filter === 'verify') return verificationCards.includes(card);
+      return card.dataset.kind === filter;
+    }
+
+    nodes.forEach(node => node.addEventListener('click', () => {
+      const filter = node.dataset.graphFilter || 'all';
+      nodes.forEach(other => other.classList.toggle('active', other === node));
+      cards.forEach(card => card.classList.toggle('graph-focus', filter !== 'all' && matches(card, filter)));
+      if (filter !== 'all') {
+        const first = cards.find(card => matches(card, filter));
+        first?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }));
+  }
+
   function buildToolboxSearch() {
     if (page !== 'toolbox') return;
     const search = document.querySelector('#repo-search');
@@ -222,5 +269,6 @@
   setNavigation();
   buildToolbar();
   buildToolboxSearch();
+  buildGraphBoard();
   sourceStrip();
 })();

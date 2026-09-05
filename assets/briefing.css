@@ -140,6 +140,170 @@ header .tag {
 
 .dashboard-intro .note { margin: 0; }
 
+.graph-board {
+  margin: 0 0 18px;
+  padding: 20px;
+  border: 1px solid #ccd8cf;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #f7faf7);
+  box-shadow: var(--shadow);
+}
+
+.graph-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.graph-head h2 {
+  margin: 10px 0 6px;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+}
+
+.graph-head p {
+  max-width: 760px;
+  margin: 0;
+  color: #53625a;
+  font-size: .92rem;
+  line-height: 1.75;
+}
+
+.graph-verdict {
+  min-width: 150px;
+  padding: 13px 15px;
+  border: 1px solid #b7d3c0;
+  border-radius: 12px;
+  background: #e9f6ed;
+  color: #176137;
+  text-align: right;
+}
+
+.graph-verdict strong {
+  display: block;
+  font-size: 1.05rem;
+}
+
+.graph-verdict span {
+  display: block;
+  margin-top: 2px;
+  color: #51725d;
+  font-size: .78rem;
+}
+
+.graph-flow {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.graph-node {
+  position: relative;
+  min-height: 110px;
+  padding: 13px 12px;
+  border: 1px solid #cdd8d0;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.graph-node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -8px;
+  width: 8px;
+  border-top: 2px solid #b7c6bb;
+}
+
+.graph-node span {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+.graph-node b {
+  display: block;
+  margin-bottom: 4px;
+  font-size: .9rem;
+  line-height: 1.35;
+}
+
+.graph-node small {
+  display: block;
+  color: var(--muted);
+  font-size: .75rem;
+  line-height: 1.45;
+}
+
+.graph-node:hover,
+.graph-node.active {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(29, 106, 73, .12);
+}
+
+.graph-node.is-review span {
+  background: var(--amber);
+}
+
+.graph-metrics {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.graph-metrics div {
+  padding: 12px;
+  border: 1px solid #d9e1da;
+  border-radius: 11px;
+  background: #fbfdfb;
+}
+
+.graph-metrics b {
+  display: block;
+  color: var(--green);
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.graph-metrics span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: .75rem;
+}
+
+.graph-review {
+  margin: 0;
+  padding: 12px 14px;
+  border-left: 4px solid var(--amber);
+  border-radius: 10px;
+  background: #fff8e9;
+  color: #644818;
+  font-size: .86rem;
+  line-height: 1.7;
+}
+
+.card.graph-focus {
+  outline: 3px solid rgba(169, 106, 19, .35);
+  outline-offset: 2px;
+}
+
 .desk-toolbar {
   position: sticky;
   top: 8px;
@@ -385,6 +549,11 @@ footer { line-height: 1.75 !important; }
   body > main,
   body > .wrap { width: min(100% - 24px, 1440px) !important; padding-top: 12px; }
   header { padding: 19px 17px 16px !important; border-radius: 13px; }
+  .graph-head { grid-template-columns: 1fr; }
+  .graph-verdict { text-align: left; }
+  .graph-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .graph-node:not(:last-child)::after { display: none; }
+  .graph-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .desk-toolbar { position: static; grid-template-columns: 1fr; }
   .desk-count { white-space: normal; }
   .toolbox-hero { grid-template-columns: 1fr; }
@@ -394,6 +563,10 @@ footer { line-height: 1.75 !important; }
   body { font-size: 15px; }
   .grid { grid-template-columns: 1fr !important; }
   .card { padding: 18px !important; }
+  .graph-board { padding: 16px; }
+  .graph-flow,
+  .graph-metrics { grid-template-columns: 1fr; }
+  .graph-node { min-height: auto; }
   .nav a,
   .workspace-nav a { flex: 1 1 auto; justify-content: center; }
   .principles { grid-template-columns: 1fr; }
