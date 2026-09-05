@@ -2,6 +2,14 @@ name: Update Daily Briefing Graph
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-briefing.yml'
+      - '.codex/graph-*.md'
+      - 'scripts/render_graph.py'
+      - 'assets/graph.css'
+      - 'assets/graph.js'
   schedule:
     # GitHub Actions schedules use UTC.
     # 21:07 UTC Sun-Thu = 06:07 KST Mon-Fri.
