@@ -14,8 +14,8 @@ on:
     # GitHub Actions schedules use UTC.
     # 21:07 UTC Sun-Thu = 06:07 KST Mon-Fri.
     - cron: "7 21 * * 0-4"
-    # 05:07 UTC Mon-Fri = 14:07 KST Mon-Fri.
-    - cron: "7 5 * * 1-5"
+    # 05:00 UTC Mon-Fri = 14:00 KST Mon-Fri.
+    - cron: "0 5 * * 1-5"
 
 concurrency:
   group: daily-briefing-graph
