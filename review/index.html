@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>기사·원자료 검증 | 데일리 브리핑</title>
+<link rel="stylesheet" href="../assets/review.css">
+<script src="../assets/review.js" defer></script>
+</head>
+<body>
+<main>
+<header><div><span class="eyebrow">송고 전 확인</span><h1>기사·원자료 검증</h1></div><a href="../" target="_top">브리핑으로</a></header>
+<p class="intro">기사와 원자료를 대조하고, 추가로 확인할 사실을 정리하세요.</p>
+<p class="notice">기본 대조는 이 브라우저에서만 실행됩니다. AI 분석·웹 검색은 연결되지 않았습니다. 입력 내용은 자동 전송·공개되지 않습니다.</p>
+<div class="columns">
+<section class="panel"><h2>1. 기사</h2>
+<label for="headline">제목·부제</label><textarea id="headline" rows="3" placeholder="제목과 부제 3줄을 붙여 넣으세요."></textarea>
+<label for="article">본문</label><textarea id="article" rows="9" placeholder="검토할 기사 본문"></textarea>
+<label for="keywords">꼭 확인할 회사·인명·직함·품목·행사명</label><input id="keywords" placeholder="쉼표로 구분해 입력">
+</section>
+<section class="panel"><h2>2. 원자료</h2>
+<label for="sources">보도자료·공시·통계 원문</label><textarea id="sources" rows="13" placeholder="자료마다 [자료명 / 발표일]을 적고 본문을 붙여 넣으세요. 링크만으로는 대조할 수 없습니다."></textarea>
+<label for="links">출처 링크·자료 위치</label><textarea id="links" rows="2" placeholder="원문 URL, 공시명과 페이지 등 (기록용, 자동 접속하지 않음)"></textarea>
+</section>
+</div>
+<div class="actions"><button id="check" class="primary">기본 대조 실행</button><button id="save">이 브라우저에 저장</button><button id="clear">입력·저장본 지우기</button></div>
+<p id="status" role="status" aria-live="polite">기사와 원자료를 입력한 뒤 기본 대조를 실행하세요.</p>
+<section class="panel" aria-labelledby="results-title"><h2 id="results-title">3. 대조 결과</h2>
+<p class="hint">숫자·입력한 핵심어의 동일 표기만 찾습니다. 단위 환산·맥락·사실 여부는 판정하지 않습니다. 같은 숫자가 있어도 대상·기간이 다를 수 있습니다.</p>
+<div id="results"><p class="empty">아직 실행하지 않았습니다.</p></div></section>
+<section class="panel"><h2>4. 사람이 확인할 항목</h2><p class="hint">체크는 검토 기록이며, AI의 사실 판정이나 송고 승인 표시가 아닙니다.</p>
+<div id="checklist">
+<label><input type="checkbox" value="제목·품목"> 제목·리드의 핵심 명사와 실제 행사·판매 대상이 일치한다.</label>
+<label><input type="checkbox" value="수치·기간"> 숫자의 단위·기간·연결/별도 기준과 계획/집행 여부를 확인했다.</label>
+<label><input type="checkbox" value="새 사실"> 추가 취재·공시·통계·과거 수치·경쟁사 비교 중 새 맥락을 확보했다.</label>
+<label><input type="checkbox" value="인용·전망"> 인용문은 원문과 일치하고 전망·가능성을 확정처럼 쓰지 않았다.</label>
+<label><input type="checkbox" value="저작권"> 타사 기사·사진의 이용 범위와 출처를 확인했다.</label>
+<label><input type="checkbox" value="광고성"> 우월성·구매 유도 표현의 근거와 광고성 위험을 검토했다.</label>
+<label><input type="checkbox" value="분류·중복"> 기사 카테고리와 기존 송고 기사와의 중복을 확인했다.</label>
+</div></section>
+<section class="panel"><h2>5. AI 심층 검증</h2>
+<p>검증 요청을 복사해 ChatGPT에 붙여 넣으세요. 답변을 아래에 옮기면 원자료와 함께 검토할 수 있습니다.</p>
+<div class="actions"><button id="prompt">AI 검증 요청 만들기</button><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT 열기 ↗</a></div>
+<details id="prompt-box"><summary>생성한 검증 요청 보기</summary><textarea id="prompt-text" rows="10" readonly aria-label="AI 검증 요청"></textarea><button id="copy">검증 요청 복사</button></details>
+<label for="ai-result">AI 답변·추가 취재 메모</label><textarea id="ai-result" rows="6" placeholder="AI 답변은 자동으로 가져오지 않습니다. 원문 확인 뒤 메모를 함께 남기세요."></textarea>
+<button id="export">검토 기록 내려받기</button>
+</section>
+<footer>기본 대조와 AI 답변은 취재 보조 자료입니다. 최종 사실 확인은 원문과 취재 결과를 기준으로 하세요. 저장은 현재 브라우저에만 적용되며 다른 PC와 동기화되지 않습니다.</footer>
+</main>
+</body></html>

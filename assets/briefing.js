@@ -3,7 +3,7 @@
 
   const body = document.body;
   const path = window.location.pathname;
-  const inSubdir = /\/(morning|toolbox)\/?$/.test(path);
+  const inSubdir = /\/(morning|toolbox)(?:\/index\.html)?\/?$/.test(path);
   const root = inSubdir ? '../' : './';
   const page = path.includes('/morning') ? 'morning' : path.includes('/toolbox') ? 'toolbox' : 'pitch';
   const assetVersion = '20260905-polish-v1';
@@ -29,7 +29,8 @@
     const items = [
       ['pitch', root, '오늘의 발제'],
       ['morning', root + 'morning/', '모닝 브리핑'],
-      ['toolbox', root + 'toolbox/', '취재 도구']
+      ['toolbox', root + 'toolbox/', '취재 도구'],
+      ['review', '#article-review', '기사·원자료 검증']
     ];
 
     nav.innerHTML = items.map(([key, href, label]) =>
@@ -145,7 +146,32 @@
     apply();
   }
 
+  function buildReviewPanel() {
+    const main = document.querySelector('main');
+    if (!main || document.getElementById('article-review')) return;
+    const panel = document.createElement('details');
+    panel.id = 'article-review';
+    panel.style.cssText = 'margin:20px 0;background:#fff;border:1px solid #b9c4bc;border-radius:10px;padding:16px;scroll-margin-top:16px';
+    panel.innerHTML = `<summary style="cursor:pointer;font-weight:750;font-size:1.1rem">기사·원자료 검증 <span style="font-size:.875rem;font-weight:400">— 눌러서 작업 창 열기</span></summary><p>기사와 원자료 대조 · AI 검증 요청 · 검토 기록 <a href="${root}review/" target="_blank" rel="noopener">새 창에서 열기 ↗</a></p>`;
+    let frame;
+    panel.addEventListener('toggle', () => {
+      if (!panel.open || frame) return;
+      frame = document.createElement('iframe');
+      frame.title = '기사와 원자료 검증 작업 창';
+      frame.src = root + 'review/';
+      frame.style.cssText = 'width:100%;height:760px;border:1px solid #d9ded7;border-radius:6px;background:#f4f5f1';
+      panel.appendChild(frame);
+    });
+    const header = main.querySelector('header');
+    if (header) header.after(panel); else main.prepend(panel);
+    const open = () => { if (location.hash === '#article-review') {panel.open = true; panel.scrollIntoView();} };
+    window.addEventListener('hashchange', open);
+    document.querySelectorAll('a[href="#article-review"]').forEach(a=>a.addEventListener('click',()=>{panel.open=true;}));
+    open();
+  }
+
   setNavigation();
+  buildReviewPanel();
   buildToolbar();
   buildToolboxSearch();
 })();
